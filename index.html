@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Intelligently reconstruct readable text from dotted and letter-separated text.">
+  <title>Smart Text Decoder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="brand-mark">SD</div>
+      <p class="eyebrow">INTELLIGENT TEXT RECONSTRUCTION</p>
+      <h1>Smart Text Decoder</h1>
+      <p class="subtitle">Turn dotted, spaced-out and mixed text into readable words and sentences.</p>
+      <div class="capabilities"><span>Dictionary-assisted</span><span>Context-aware</span><span>Private processing</span></div>
+    </header>
+
+    <section class="workspace card">
+      <div class="section-heading">
+        <div><p class="eyebrow">01 / SOURCE</p><h2>Your text</h2></div>
+        <span class="counter" id="inputCount">0 characters</span>
+      </div>
+      <textarea id="inputText" spellcheck="false" autocomplete="off" placeholder="Paste any text here…
+
+Examples:
+hello.world
+h.e.l.l.o.w.o.r.l.d
+h o s t  w o r l d
+t.h.i.s.i.s.a.t.e.s.t"></textarea>
+      <div class="toolbar">
+        <div class="left-tools">
+          <button class="button button-primary" id="decodeButton">Decode text</button>
+          <button class="button button-quiet" id="clearButton">Clear</button>
+        </div>
+        <label class="toggle"><input type="checkbox" id="liveToggle" checked><span class="toggle-ui"></span><span>Live decode</span></label>
+      </div>
+    </section>
+
+    <section class="workspace card result-card">
+      <div class="section-heading">
+        <div><p class="eyebrow">02 / RESULT</p><h2>Readable text</h2></div>
+        <span class="counter" id="outputCount">0 characters</span>
+      </div>
+      <textarea id="outputText" readonly placeholder="Your reconstructed text will appear here…"></textarea>
+      <div class="result-meta">
+        <span class="status" id="status" role="status" aria-live="polite">Ready when you are.</span>
+        <span class="engine-label" id="engineLabel">Engine: loading dictionary…</span>
+      </div>
+      <div class="toolbar">
+        <div class="left-tools">
+          <button class="button button-success" id="copyButton">Copy result</button>
+          <button class="button button-quiet" id="replaceButton">Use result as input</button>
+        </div>
+        <button class="button button-quiet" id="downloadButton">Download .txt</button>
+      </div>
+    </section>
+
+    <section class="card help-card">
+      <div class="section-heading"><div><p class="eyebrow">HOW IT READS YOUR TEXT</p><h2>Recognizes different patterns</h2></div></div>
+      <div class="examples">
+        <div class="example"><span>Dotted word separator</span><code>hello.world</code><b>hello world</b></div>
+        <div class="example"><span>Dotted letters</span><code>h.e.l.l.o</code><b>hello</b></div>
+        <div class="example"><span>Spaced letters</span><code>h o s t</code><b>host</b></div>
+        <div class="example"><span>Multiple spaced words</span><code>h o s t&nbsp;&nbsp; w o r l d</code><b>host world</b></div>
+        <div class="example"><span>Continuous dotted letters</span><code>t.h.i.s.i.s.a.t.e.s.t</code><b>this is a test</b></div>
+        <div class="example"><span>Mixed patterns</span><code>hello.w.o.r.l.d</code><b>hello world</b></div>
+      </div>
+      <p class="note">For space-separated letters, use one space between letters and two or more spaces between words. English dictionary segmentation is used to infer missing word boundaries.</p>
+    </section>
+    <footer>Runs in your browser · No account · No text sent to a server</footer>
+  </main>
+  <script src="decoder.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
