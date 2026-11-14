@@ -1,3 +1,4 @@
+
 name: Build and deploy Smart Text Decoder
 
 on:
@@ -15,34 +16,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
 
-      - name: Prepare dictionary data
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download dictionaries
         run: |
           curl -fL --retry 3 \
             https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt \
             -o words.txt
+
           curl -fL --retry 3 \
-            https://raw.githubusercontent.com/first20hours/google-10000-english/master/first_10000.txt \
+            https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt \
             -o common-words.txt
+
           test -s words.txt
           test -s common-words.txt
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5
 
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+        
